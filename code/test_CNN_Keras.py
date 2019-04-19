@@ -64,7 +64,7 @@ model.add(Dense(128, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(num_classes, activation='sigmoid'))
 
-model.compile(loss='categorical_crossentropy',
+model.compile(loss='binary_crossentropy',#categorical_crossentropy
               optimizer=keras.optimizers.Adadelta(),
               metrics=['accuracy'])
 
@@ -77,6 +77,10 @@ model.fit(x_train, y_train,
 
 print("Testing ==========~~~~~~~~~~~~======")
 score = model.evaluate(x_test, y_test, verbose=0)
+
+
+result = model.predict(x_test)
+np.savetxt('predict_result.txt', result)
 
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
